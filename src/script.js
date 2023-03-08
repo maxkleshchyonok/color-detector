@@ -8,19 +8,6 @@ let customAlert = document.getElementById("custom-alert");
 let pickedColorRef = document.getElementById("picked-color-ref");
 let eyeDropper;
 
-const rgbObject = {
-    black: [0, 0, 0],
-    white: [255, 255, 255],
-    red: [255, 0, 0],
-    green: [0,128,0],
-    blue: [0,0,255],
-    yellow: [255, 255, 0],
-    aqua: [0, 255, 255],
-    purple: [128,0,128],
-    gray: [128, 128, 128],
-    orange: [255,165,0],
-    brown: [165,42,42],
-}
 
 window.onload = () => {
     if ("EyeDropper" in window) {
@@ -128,104 +115,6 @@ const colorSelector = async () => {
                 audio.play();
             }
 
-
-
-
-            // if(rgbArr[0] > 200 && rgbArr[1] < 10 && rgbArr[2] < 10) {
-            //     audio.src = './assets/audio/red.mp3';
-            //     audio.play();
-            // }
-            // if(rgbArr[0] <10 && rgbArr[1] > 200 && rgbArr[2] < 10) {
-            //     audio.src = './assets/audio/green.mp3';
-            //     audio.play();
-            // }
-            // if(rgbArr[0] < 10 && rgbArr[1] < 10 && rgbArr[2] > 200) {
-            //     audio.src = './assets/audio/blue.mp3';
-            //     audio.play();
-            // }
-            //
-            // if (rgbArr[0] > 100 && rgbArr[1] < 10 && rgbArr[2] < 10 && rgbArr[0] < 200) {
-            //         //let audio = new Audio();
-            //         //audio.preload = 'auto';
-            //         audio.src = './assets/audio/red.mp3';
-            //         audio.play();
-            // }
-            // if (rgbArr[0] > 200 && rgbArr[1] < 80 && rgbArr[2] < 50) {
-            //     //let audio = new Audio();
-            //     //audio.preload = 'auto';
-            //     audio.src = './assets/audio/red.mp3';
-            //     audio.play();
-            // }
-            // if (rgbArr[0] < 5 && rgbArr[1] > 100 && rgbArr[2] < 5) {
-            //     //let audio = new Audio();
-            //     //audio.preload = 'auto';
-            //     audio.src = './assets/audio/green.mp3';
-            //     audio.play();
-            // }
-            // if (rgbArr[0] < 60 && rgbArr[1] > 100 && rgbArr[2] < 80) {
-            //     //let audio = new Audio();
-            //     //audio.preload = 'auto';
-            //     audio.src = './assets/audio/green.mp3';
-            //     audio.play();
-            // }
-            // if (rgbArr[0] < 40 && rgbArr[1] < 40 && rgbArr[2] < 40) {
-            //     //let audio = new Audio();
-            //     //audio.preload = 'auto';
-            //     audio.src = './assets/audio/green.mp3';
-            //     audio.play();
-            // }
-            // if (rgbArr[0] < 100 && rgbArr[1] < 100 && rgbArr[2] < 100) {
-            //     //let audio = new Audio();
-            //     //audio.preload = 'auto';
-            //     audio.src = './assets/audio/green.mp3';
-            //     audio.play();
-            // }
-            // if (rgbArr[0] > 100 && rgbArr[0] < 175 && rgbArr[1] > 100 && rgbArr[2] < 160) {
-            //     //let audio = new Audio();
-            //     //audio.preload = 'auto';
-            //     audio.src = './assets/audio/green.mp3';
-            //     audio.play();
-            // }
-            // // if (rgbArr[0] > 30 && rgbArr[0] < 170 && rgbArr[1] > 30 && rgbArr[2] < 60) {
-            // //     //let audio = new Audio();
-            // //     //audio.preload = 'auto';
-            // //     audio.src = './assets/audio/red.mp3';
-            // //     audio.play();
-            // // }
-            // if (rgbArr[0] > 130 && rgbArr[1] < 100 && rgbArr[2] < 80) {
-            //     //let audio = new Audio();
-            //     //audio.preload = 'auto';
-            //     audio.src = './assets/audio/red.mp3';
-            //     audio.play();
-            // }
-            // if(rgbArr[0] < 30 && rgbArr[1] < 30 && rgbArr[2] > 100 && rgbArr[2] < 150) {
-            //     audio.src = './assets/audio/blue.mp3';
-            //     audio.play();
-            // }
-            // if(rgbArr[0] < 70 && rgbArr[1] > 120 && rgbArr[2] > 150) {
-            //     audio.src = './assets/audio/blue.mp3';
-            //     audio.play();
-            // }
-            // if(rgbArr[0] < 170 && rgbArr[1] > 190 && rgbArr[2] > 210) {
-            //     audio.src = './assets/audio/blue.mp3';
-            //     audio.play();
-            // }
-            // if(rgbArr[0] < 70 && rgbArr[1] < 70 && rgbArr[2] > 200) {
-            //     audio.src = './assets/audio/blue.mp3';
-            //     audio.play();
-            // }
-            // if(rgbArr[0] < 70 && rgbArr[1] < 100 && rgbArr[2] > 110) {
-            //     audio.src = './assets/audio/blue.mp3';
-            //     audio.play();
-            // }
-            // if(rgbArr[0] > 180 && rgbArr[1] > 130 && rgbArr[2] < 40) {
-            //     audio.src = './assets/audio/yellow.mp3';
-            //     audio.play();
-            // }
-            // if(rgbArr[0] > 220 && rgbArr[1] > 200 && rgbArr[2] < 80) {
-            //     audio.src = './assets/audio/yellow.mp3';
-            //     audio.play();
-            // }
 
 
         })
