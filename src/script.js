@@ -6,6 +6,7 @@ let hexValRef = document.getElementById("hex-val-ref");
 let rgbValRef = document.getElementById("rgb-val-ref");
 let customAlert = document.getElementById("custom-alert");
 let pickedColorRef = document.getElementById("picked-color-ref");
+let liveButton = document.getElementById('live');
 let eyeDropper;
 
 
@@ -140,6 +141,26 @@ fileInput.onchange = () => {
         image.setAttribute("src", reader.result);
     };
 };
+
+function startVideo() {
+    navigator.getUserMedia(
+        {video: {}},
+        stream => video.srcObject = stream,
+        err => console.log(err)
+    )
+}
+
+liveButton.addEventListener('click', () => {
+    const video = document.createElement('video');
+    video.className = 'video';
+    image.remove();
+    const container = document.querySelector('.image-container');
+    container.append(video);
+    video.id = 'video';
+    video.autoplay = true;
+    video.muted = true;
+    startVideo();
+});
 
 
 let copy = (textId) => {

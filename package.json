@@ -1,0 +1,19 @@
+{
+  "name": "color-detector",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxkleshchyonok/color-detector.git"
+  },
+  "author": "Maksim Kleshchenok",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maxkleshchyonok/color-detector/issues"
+  },
+  "homepage": "https://github.com/maxkleshchyonok/color-detector#readme"
+}

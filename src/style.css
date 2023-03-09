@@ -27,6 +27,9 @@ img {
     width: 80%;
     margin: auto;
 }
+.video {
+    width: 100%;
+}
 .btns-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
