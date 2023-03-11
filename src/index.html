@@ -3,6 +3,9 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image Color Picker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Iso&display=swap" rel="stylesheet">
     <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -16,9 +19,6 @@
 <body>
 <h1 class="title">Color Detector</h1>
 <div class="wrapper">
-    <div class="image-container">
-        <img id="image" src="https://t4.ftcdn.net/jpg/05/17/53/57/360_F_517535712_q7f9QC9X6TQxWi6xYZZbMmw5cnLMr279.jpg" />
-    </div>
     <div>
         <div>
             <canvas id="canvas" width="300" height="227"></canvas>
@@ -29,20 +29,20 @@
     <div class="btns-container">
         <input type="file" id="file" accesskey="image/*" />
         <label for="file">Open A Photo</label>
-        <button id="pick-color">Pick Color</button>
+<!--        <button id="pick-color">Pick Color</button>-->
         <button id="live">Live Cam</button>
     </div>
     <div id="error" class="hide"></div>
-    <div id="result" class="hide">
+    <div id="result">
         <div>
             <input type="text" id="hex-val-ref" />
-            <button onclick="copy('hex-val-ref')">
+            <button class="copy" onclick="copy('hex-val-ref')">
                 <i class="fa-regular fa-copy"></i>
             </button>
         </div>
         <div>
             <input type="text" id="rgb-val-ref" />
-            <button onclick="copy('rgb-val-ref')">
+            <button class="copy" onclick="copy('rgb-val-ref')">
                 <i class="fa-regular fa-copy"></i>
             </button>
         </div>

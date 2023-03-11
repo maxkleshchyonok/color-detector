@@ -2,7 +2,7 @@ let pickColor = document.getElementById("pick-color");
 let error = document.getElementById("error");
 let fileInput = document.getElementById("file");
 let image = document.getElementById("image");
-let hexValRef = document.getElementById("hex-val-ref");
+let hslValRef = document.getElementById("hex-val-ref");
 let rgbValRef = document.getElementById("rgb-val-ref");
 let customAlert = document.getElementById("custom-alert");
 let pickedColorRef = document.getElementById("picked-color-ref");
@@ -23,122 +23,13 @@ window.onload = () => {
 };
 
 
-const colorSelector = async () => {
-    const color = await eyeDropper
-        .open()
-        .then((colorValue) => {
-            error.classList.add("hide");
-            let hexValue = colorValue.sRGBHex;
-            let rgbArr = [];
-            for (let i = 1; i < hexValue.length; i += 2) {
-                rgbArr.push(parseInt(hexValue[i] + hexValue[i + 1], 16));
-                //console.log(rgbArr);
-            }
-            console.log(rgbArr);
-            let rgbValue = "rgb(" + rgbArr + ")";
-            console.log(hexValue, rgbValue);
-            result.style.display = "grid";
-            hexValRef.value = hexValue;
-            rgbValRef.value = rgbValue;
-            pickedColorRef.style.backgroundColor = hexValue;
-
-            let r = rgbArr[0];
-            let g = rgbArr[1];
-            let b = rgbArr[2];
-            let hsl;
-
-
-            const RGBToHSL = () => {
-                r /= 255;
-                g /= 255;
-                b /= 255;
-                const l = Math.max(r, g, b);
-                const s = l - Math.min(r, g, b);
-                const h = s
-                    ? l === r
-                        ? (g - b) / s
-                        : l === g
-                            ? 2 + (b - r) / s
-                            : 4 + (r - g) / s
-                    : 0;
-
-                hsl = [
-                    60 * h < 0 ? 60 * h + 360 : 60 * h,
-                    100 * (s ? (l <= 0.5 ? s / (2 * l - s) : s / (2 - (2 * l - s))) : 0),
-                    (100 * (2 * l - s)) / 2,
-                ];
-            };
-            RGBToHSL();
-
-            let audio = new Audio();
-            audio.preload = 'auto';
-
-            console.log(hsl);
-
-            if (hsl[0] > 40 && hsl[0] < 70 && hsl[2] > 10 && hsl[2] < 90) {
-                audio.src = './assets/audio/yellow.mp3';
-                audio.play();
-            }
-            if (hsl[0] > 70 && hsl[0] < 150 && hsl[2] > 10 && hsl[2] < 90) {
-                audio.src = './assets/audio/green.mp3';
-                audio.play();
-            }
-            if (hsl[0] > 175 && hsl[0] < 240 && hsl[2] > 10 && hsl[2] < 90) {
-                audio.src = './assets/audio/blue.mp3';
-                audio.play();
-            }
-            if (hsl[0] > 245 && hsl[0] < 290 && hsl[2] > 10 && hsl[2] < 90) {
-                audio.src = './assets/audio/purple.mp3';
-                audio.play();
-            }
-            if (hsl[0] > 290 && hsl[0] < 330 && hsl[2] > 10 && hsl[2] < 90) {
-                audio.src = './assets/audio/pink.mp3';
-                audio.play();
-            }
-            if (hsl[0] > 330 && hsl[0] < 360 && hsl[2] > 10 && hsl[2] < 90) {
-                audio.src = './assets/audio/red.mp3';
-                audio.play();
-            }
-            if (hsl[0] > 0 && hsl[0] < 20 && hsl[2] > 10 && hsl[2] < 90) {
-                audio.src = './assets/audio/red.mp3';
-                audio.play();
-            }
-            if (hsl[0] > 20 && hsl[0] < 40 && hsl[2] > 10 && hsl[2] < 90) {
-                audio.src = './assets/audio/orange.mp3';
-                audio.play();
-            }
-            if (hsl[2] > 90) {
-                audio.src = './assets/audio/white.mp3';
-                audio.play();
-            }
-            if (hsl[2] < 10) {
-                audio.src = './assets/audio/black.mp3';
-                audio.play();
-            }
-
-
-
-        })
-        .catch((err) => {
-            error.classList.remove("hide");
-            if (err.toString().includes("AbortError")) {
-                error.innerText = "";
-            } else {
-                error.innerText = err;
-            }
-        });
-};
-
-
-pickColor.addEventListener("click", colorSelector);
-
-
 fileInput.onchange = () => {
-    result.style.display = "none";
+    //result.style.display = "none";
     let reader = new FileReader();
     reader.readAsDataURL(fileInput.files[0]);
     reader.onload = () => {
-        image.setAttribute("src", reader.result);
+        //image.setAttribute("src", reader.result);
+        img.setAttribute("src", reader.result);
     };
 };
 
@@ -153,13 +44,19 @@ function startVideo() {
 liveButton.addEventListener('click', () => {
     const video = document.createElement('video');
     video.className = 'video';
-    image.remove();
-    const container = document.querySelector('.image-container');
+    //image.remove();
+    const container = document.querySelector('.wrapper');
     container.append(video);
     video.id = 'video';
     video.autoplay = true;
     video.muted = true;
     startVideo();
+
+    setInterval(processFrames, 24);
+    function processFrames() {
+        ctx.drawImage(video, 0, 0, 300, 400);
+    }
+
 });
 
 
@@ -172,19 +69,15 @@ let copy = (textId) => {
     }, 2000);
 };
 
-// const imageContainer = document.querySelector('.image');
-// imageContainer.addEventListener('click' , (event) => {
-//     const color = window.getComputedStyle(event.target).backgroundColor;
-//     console.log('This is my test', color);
-// });
+
 
 const img = new Image();
 img.crossOrigin = "anonymous";
-img.src = "https://www.shutterstock.com/image-photo/mountains-under-mist-morning-amazing-260nw-1725825019.jpg";
+img.src = "https://www.grouphealth.ca/wp-content/uploads/2018/05/placeholder-image.png";
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 img.addEventListener("load", () => {
-    ctx.drawImage(img, 0, 0);
+    ctx.drawImage(img, 0, -70, 300, 400);
     img.style.display = "none";
 });
 const hoveredColor = document.getElementById("hovered-color");
@@ -201,12 +94,92 @@ function pick(event, destination) {
     destination.style.background = rgba;
     destination.textContent = rgba;
 
+    rgbValRef.value = rgba;
+
+    pickedColorRef.style.backgroundColor = rgba;
+
+
+    let r = data[0];
+    let g = data[1];
+    let b = data[2];
+    let hsl;
+
+
+    const RGBToHSL = () => {
+        r /= 255;
+        g /= 255;
+        b /= 255;
+        const l = Math.max(r, g, b);
+        const s = l - Math.min(r, g, b);
+        const h = s
+            ? l === r
+                ? (g - b) / s
+                : l === g
+                    ? 2 + (b - r) / s
+                    : 4 + (r - g) / s
+            : 0;
+
+        hsl = [
+            60 * h < 0 ? 60 * h + 360 : 60 * h,
+            100 * (s ? (l <= 0.5 ? s / (2 * l - s) : s / (2 - (2 * l - s))) : 0),
+            (100 * (2 * l - s)) / 2,
+        ];
+    };
+    RGBToHSL();
+
+    let audio = new Audio();
+    audio.preload = 'auto';
+
+
+    if (hsl[0] > 40 && hsl[0] < 70 && hsl[2] > 10 && hsl[2] < 90) {
+        audio.src = './assets/audio/yellow.mp3';
+        audio.play();
+    }
+    if (hsl[0] > 70 && hsl[0] < 150 && hsl[2] > 10 && hsl[2] < 90) {
+        audio.src = './assets/audio/green.mp3';
+        audio.play();
+    }
+    if (hsl[0] > 175 && hsl[0] < 240 && hsl[2] > 10 && hsl[2] < 90) {
+        audio.src = './assets/audio/blue.mp3';
+        audio.play();
+    }
+    if (hsl[0] > 245 && hsl[0] < 290 && hsl[2] > 10 && hsl[2] < 90) {
+        audio.src = './assets/audio/purple.mp3';
+        audio.play();
+    }
+    if (hsl[0] > 290 && hsl[0] < 330 && hsl[2] > 10 && hsl[2] < 90) {
+        audio.src = './assets/audio/pink.mp3';
+        audio.play();
+    }
+    if (hsl[0] > 330 && hsl[0] < 360 && hsl[2] > 10 && hsl[2] < 90) {
+        audio.src = './assets/audio/red.mp3';
+        audio.play();
+    }
+    if (hsl[0] > 0 && hsl[0] < 20 && hsl[2] > 10 && hsl[2] < 90) {
+        audio.src = './assets/audio/red.mp3';
+        audio.play();
+    }
+    if (hsl[0] > 20 && hsl[0] < 40 && hsl[2] > 10 && hsl[2] < 90) {
+        audio.src = './assets/audio/orange.mp3';
+        audio.play();
+    }
+    if (hsl[2] > 90) {
+        audio.src = './assets/audio/white.mp3';
+        audio.play();
+    }
+    if (hsl[2] < 10) {
+        audio.src = './assets/audio/black.mp3';
+        audio.play();
+    }
+
+    hslValRef.value = hsl;
+
     return rgba;
 }
 
-// canvas.addEventListener("mousemove", (event) => pick(event, hoveredColor));
-// canvas.addEventListener("click", (event) => pick(event, selectedColor));
+//canvas.addEventListener("mousemove", (event) => pick(event, hoveredColor));
+//canvas.addEventListener("click", (event) => pick(event, selectedColor));
 
-canvas.addEventListener("touchmove", (event) => pick(event, hoveredColor));
-canvas.addEventListener("touch", (event) => pick(event, selectedColor));
+//canvas.addEventListener("touchmove", (event) => pick(event, hoveredColor));
+canvas.addEventListener("pointerdown", (event) => pick(event, selectedColor));
 

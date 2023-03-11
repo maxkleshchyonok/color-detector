@@ -5,11 +5,14 @@
     font-family: "Poppins", sans-serif;
 }
 body {
-    background-color: #9fb3f8;
+    background-color: #ffed54;
 }
 .title{
     text-align: center;
-    margin-top: 1.5em;
+    margin-top: 1em;
+    font-size: 2.6em;
+    font-family: 'Rubik Iso', cursive;
+    color: red;
 }
 .wrapper {
     background-color: #ffffff;
@@ -29,6 +32,14 @@ img {
 }
 .video {
     width: 100%;
+    visibility: hidden;
+    height: 1px;
+}
+.color-cell{
+    visibility: hidden;
+    height: 1px;
+}
+#canvas{
 }
 .btns-container {
     display: grid;
@@ -49,17 +60,22 @@ label,
 button {
     display: block;
     font-size: 1.1em;
-    background-color: #025bee;
+    box-shadow: 3px 5px 10px grey;
+    background-color: #ff5533;
     color: #ffffff;
     text-align: center;
     padding: 0.8em 0;
     border-radius: 0.3em;
     cursor: pointer;
 }
+.copy{
+    box-shadow: none;
+}
 #result {
     margin-top: 1em;
     grid-template-columns: 1fr 1fr;
     grid-gap: 1em;
+    display: grid;
 }
 #result div {
     position: relative;
