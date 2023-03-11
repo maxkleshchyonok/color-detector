@@ -7,20 +7,6 @@ let rgbValRef = document.getElementById("rgb-val-ref");
 let customAlert = document.getElementById("custom-alert");
 let pickedColorRef = document.getElementById("picked-color-ref");
 let liveButton = document.getElementById('live');
-let eyeDropper;
-
-
-window.onload = () => {
-    if ("EyeDropper" in window) {
-        pickColor.classList.remove("hide");
-        eyeDropper = new EyeDropper();
-    } else {
-        error.classList.remove("hide");
-        error.innerText = "Your browser doesn't support Eyedropper API";
-        pickColor.classList.add("hide");
-        return false;
-    }
-};
 
 
 fileInput.onchange = () => {
@@ -35,6 +21,11 @@ fileInput.onchange = () => {
 
 function startVideo() {
     navigator.getUserMedia(
+        {video: {}},
+        stream => video.srcObject = stream,
+        err => console.log(err)
+    )
+    navigator.mediaDevices.getUserMedia(
         {video: {}},
         stream => video.srcObject = stream,
         err => console.log(err)
