@@ -64,11 +64,15 @@ let copy = (textId) => {
 
 const img = new Image();
 img.crossOrigin = "anonymous";
-img.src = "https://www.grouphealth.ca/wp-content/uploads/2018/05/placeholder-image.png";
+//img.src = "https://www.grouphealth.ca/wp-content/uploads/2018/05/placeholder-image.png";
+img.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png';
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 img.addEventListener("load", () => {
-    ctx.drawImage(img, 0, -70, 300, 400);
+    //ctx.drawImage(img, -100, -120, 500, 400);
+    //ctx.drawImage(img, 0, -70, 300, 400);
+    //ctx.drawImage(img, 0, 0, 303, 300);
+    ctx.drawImage(img, 0, 0, 303, 300);
     img.style.display = "none";
 });
 const hoveredColor = document.getElementById("hovered-color");
@@ -77,9 +81,10 @@ const selectedColor = document.getElementById("selected-color");
 function pick(event, destination) {
     const bounding = canvas.getBoundingClientRect();
     const x = event.clientX - bounding.left;
-    const y = event.clientY - bounding.top;
+    const y = event.clientY - bounding.top - 65;
     const pixel = ctx.getImageData(x, y, 1, 1);
     const data = pixel.data;
+    console.log(x, y);
 
     const rgba = `rgba(${data[0]}, ${data[1]}, ${data[2]}, ${data[3] / 255})`;
     destination.style.background = rgba;
